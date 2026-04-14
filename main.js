@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
   sortPosts();
   renderDates();
   limitImages();
+  document
+    .getElementById("countryFilter")
+    ?.addEventListener("change", filterCitiesByCountry);
 });
 
 // ===============================
