@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Remix Icon -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <title>地域観光 | ローカル観光を探そう</title>
+  </head>
+  <body>
+    <!-- ================= NAVBAR ================= -->
+    <nav>
+      <div class="nav__header">
+        <div class="nav__logo">
+          <a href="#" class="logo">地域<span>観光</span></a>
+        </div>
+
+        <div class="nav__menu__btn" id="menu-btn">
+          <i class="ri-menu-line"></i>
+        </div>
+      </div>
+
+      <ul class="nav__links" id="nav-links">
+        <li><a href="#home">ホーム</a></li>
+        <li><a href="#service">サービス</a></li>
+        <li><a href="#destination">スポット</a></li>
+        <li><a href="#share">投稿</a></li>
+        <li><a href="#feed">コミュニティ</a></li>
+      </ul>
+    </nav>
+
+    <!-- ================= HERO ================= -->
+    <header class="header" id="home">
+      <div class="section__container header__container">
+        <h1>世界を<br /><span>探検しよう</span></h1>
+        <p>あなたの旅の最高の瞬間をシェアしましょう</p>
+      </div>
+    </header>
+
+    <!-- ================= FEATURES ================= -->
+    <section class="section__container feature__container" id="service">
+      <div class="feature__card">
+        <img src="assets/feature-1.png" alt="feature" />
+        <div>
+          <h4>おすすめスポット</h4>
+          <p>コミュニティが共有する魅力的な場所を発見しましょう。</p>
+        </div>
+      </div>
+
+      <div class="feature__card">
+        <img src="assets/feature-2.png" alt="feature" />
+        <div>
+          <h4>リアルな体験</h4>
+          <p>留学生や地元の人のリアルなレビューを読めます。</p>
+        </div>
+      </div>
+
+      <div class="feature__card">
+        <img src="assets/feature-3.png" alt="feature" />
+        <div>
+          <h4>簡単にシェア</h4>
+          <p>あなたのおすすめスポットを簡単に投稿できます。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= DESTINATION ================= -->
+    <section class="destination" id="destination">
+      <div class="section__container destination__container">
+        <h2 class="section__header">人気スポット</h2>
+        <p class="section__description"></p>
+
+        <div class="destination__grid">
+          <div class="destination__card">
+            <img src="assets/destination-1.jpg" alt="Fuji" />
+            <div class="destination__content">富士山</div>
+          </div>
+
+          <div class="destination__card">
+            <img src="assets/destination-2.jpg" alt="Kyoto" />
+            <div class="destination__content">京都</div>
+          </div>
+
+          <div class="destination__card">
+            <img src="assets/destination-3.jpg" alt="Hokkaido" />
+            <div class="destination__content">北海道</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= COMMUNITY FEED ================= -->
+    <section class="section__container community__feed" id="feed">
+      <h2 class="section__header">コミュニティ投稿</h2>
+      <p class="section__description">コミュニティから厳選された投稿</p>
+
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="場所を検索..." />
+        <i class="ri-search-line"></i>
+      </div>
+
+      <div class="feed__filter">
+        <select id="locationFilter">
+          <option value="all">すべての場所</option>
+          <option value="Tokyo">東京</option>
+          <option value="Kyoto">京都</option>
+          <option value="Osaka">大阪</option>
+          <option value="Hokkaido">北海道</option>
+          <option value="Okinawa">沖縄</option>
+          <option value="Kumamoto">熊本</option>
+        </select>
+
+        <select id="countryFilter">
+          <option value="all">すべての国</option>
+          <option value="Japan">日本</option>
+          <option value="Vietnam">ベトナム</option>
+        </select>
+
+        <select id="typeFilter">
+          <option value="all">すべてのタイプ</option>
+          <option value="city">都市観光</option>
+          <option value="mountain">登山</option>
+          <option value="nature">自然</option>
+          <option value="food">グルメ</option>
+          <option value="beach">ビーチ</option>
+          <option value="onsen">温泉</option>
+        </select>
+      </div>
+
+      <div class="feed__grid">
+        <!-- TOKYO -->
+        <div
+          class="feed__card"
+          data-location="Tokyo"
+          data-country="Japan"
+          data-type="city"
+          data-date="2026-04-14"
+        >
+          <div class="feed__header">
+            <h4>名前を隠す</h4>
+            <p>浅草寺（東京）</p>
+
+            <div class="post-tags">
+              <span class="tag country">🇯🇵 日本</span>
+              <span class="tag type">🏙 都市観光</span>
+            </div>
+
+            <span class="post-date"></span>
+          </div>
+
+          <div class="feed__images">
+            <img src="assets/tokyo/asakusa-1.jpg" />
+            <img src="assets/tokyo/asakusa-2.jpg" />
+            <img src="assets/tokyo/asakusa-3.jpg" />
+            <img src="assets/tokyo/asakusa-4.jpg" />
+          </div>
+
+          <div class="feed__content">
+            <p>
+              浅草寺は東京で最も有名な観光地の一つです。
+              雷門から続く仲見世通りでは、和菓子や伝統工芸品を楽しめます。
+              夜のライトアップも非常に美しく、昼とは違う魅力があります。
+            </p>
+          </div>
+
+          <button class="open-post">もっと見る</button>
+        </div>
+
+
+
+
+
+        <!-- KYOTO -->
+        <div
+          class="feed__card"
+          data-location="Kyoto"
+          data-country="Japan"
+          data-type="nature"
+          data-date="2026-04-12"
+        >
+          <div class="feed__header">
+            <h4>名前を隠す/h4>
+            <p>清水寺（京都）</p>
+
+            <div class="post-tags">
+              <span class="tag country">🇯🇵 日本</span>
+              <span class="tag type">🌿 自然</span>
+            </div>
+
+            <span class="post-date"></span>
+          </div>
+
+          <img src="assets/kyoto/kiyomizu.jpg" />
+
+          <div class="feed__content">
+            <p>
+              清水寺は四季折々の景色が楽しめる名所です。
+              春の桜、秋の紅葉は特に人気で、 本堂の舞台からの景色は圧巻です。
+            </p>
+          </div>
+
+          <button class="open-post">もっと見る</button>
+        </div>
+
+        <!-- OSAKA -->
+        <div
+          class="feed__card"
+          data-location="Osaka"
+          data-country="Japan"
+          data-type="food"
+          data-date="2026-04-11"
+        >
+          <div class="feed__header">
+            <h4>名前を隠す</h4>
+            <p>道頓堀（大阪）</p>
+
+            <div class="post-tags">
+              <span class="tag country">🇯🇵 日本</span>
+              <span class="tag type">🍜 グルメ</span>
+            </div>
+
+            <span class="post-date"></span>
+          </div>
+
+          <img src="assets/osaka/dotonbori.jpg" />
+
+          <div class="feed__content">
+            <p>
+              道頓堀は大阪グルメの中心地です。
+              たこ焼きやお好み焼きを楽しみながら、
+              夜のネオン街を歩くのがおすすめです。
+            </p>
+          </div>
+
+          <button class="open-post">もっと見る</button>
+        </div>
+
+        <!-- HOKKAIDO -->
+        <div
+          class="feed__card"
+          data-location="Hokkaido"
+          data-country="Japan"
+          data-type="nature"
+          data-date="2026-04-08"
+        >
+          <div class="feed__header">
+            <h4>鈴木 一郎</h4>
+            <p>青い池（北海道）</p>
+
+            <div class="post-tags">
+              <span class="tag country">🇯🇵 日本</span>
+              <span class="tag type">🌿 自然</span>
+            </div>
+
+            <span class="post-date"></span>
+          </div>
+
+          <img src="assets/hokkaido/bluepond.jpg" />
+
+          <div class="feed__content">
+            <p>
+              神秘的な青色が魅力の観光地。 天候によって色が変わるため、
+              何度訪れても新しい発見があります。
+            </p>
+          </div>
+
+          <button class="open-post">もっと見る</button>
+        </div>
+
+        <!-- OKINAWA -->
+        <div
+          class="feed__card"
+          data-location="Okinawa"
+          data-country="Japan"
+          data-type="beach"
+          data-date="2026-04-07"
+        >
+          <div class="feed__header">
+            <h4>上原 大輔</h4>
+            <p>古宇利島（沖縄）</p>
+
+            <div class="post-tags">
+              <span class="tag country">🇯🇵 日本</span>
+              <span class="tag type">🏖 ビーチ</span>
+            </div>
+
+            <span class="post-date"></span>
+          </div>
+
+          <img src="assets/okinawa/kouri.jpg" />
+
+          <div class="feed__content">
+            <p>
+              透明度の高い海と絶景ドライブが楽しめる島。
+              カップルや観光客に大人気のスポットです。
+            </p>
+          </div>
+
+          <button class="open-post">もっと見る</button>
+        </div>
+
+        <!-- KUMAMOTO -->
+        <div
+          class="feed__card"
+          data-location="Kumamoto"
+          data-country="Japan"
+          data-type="mountain"
+          data-date="2026-04-13"
+        >
+          <div class="feed__header">
+            <h4>井上 恒一</h4>
+            <p>阿蘇山（熊本）</p>
+
+            <div class="post-tags">
+              <span class="tag country">🇯🇵 日本</span>
+              <span class="tag type">🏔 登山</span>
+            </div>
+
+            <span class="post-date"></span>
+          </div>
+
+          <div class="feed__images">
+            <img src="assets/kumamoto/aso1.jpg" />
+            <img src="assets/kumamoto/aso2.jpg" />
+            <img src="assets/kumamoto/aso3.jpg" />
+          </div>
+
+          <div class="feed__content">
+            <p>
+              世界最大級のカルデラを持つ火山。
+              大自然のスケールを体感できる絶景スポットです。
+            </p>
+          </div>
+
+          <button class="open-post">もっと見る</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SHARE ================= -->
+    <section class="section__container location__submit" id="share">
+      <h2 class="section__header">観光スポットを投稿</h2>
+
+      <p class="section__description">
+        あなたのおすすめスポットをみんなにシェアしましょう。
+      </p>
+
+      <form id="shareForm" class="location__form">
+        <input id="userName" placeholder="お名前" required />
+        <input id="userEmail" placeholder="メールアドレス" required />
+        <input id="placeName" placeholder="場所名" required />
+
+        <textarea
+          id="userMessage"
+          rows="5"
+          placeholder="体験を記入してください..."
+          required
+        ></textarea>
+
+        <input
+          id="imageLink"
+          placeholder="画像リンク（カンマ区切り）"
+          required
+        />
+
+        <input type="hidden" id="postDate" />
+
+        <button type="submit" class="btn">投稿する</button>
+      </form>
+
+      <p id="successMessage" class="success__message"></p>
+    </section>
+
+    <!-- ================= MODAL ================= -->
+    <div id="postModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="modalBody"></div>
+      </div>
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <div class="section__container footer__container">
+        <div class="footer__col">
+          <div class="footer__logo">
+            <a href="#" class="logo">地域<span>観光</span></a>
+          </div>
+          <p>日本の美しい場所や旅行体験を共有するコミュニティです。</p>
+        </div>
+
+        <div class="footer__col">
+          <h4>クイックリンク</h4>
+          <ul class="footer__links">
+            <li><a href="#home">ホーム</a></li>
+            <li><a href="#destination">スポット</a></li>
+            <li><a href="#share">投稿</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h4>SNS</h4>
+          <ul class="footer__socials">
+            <li>
+              <a href="#"><i class="ri-facebook-fill"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="ri-instagram-fill"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="ri-twitter-x-fill"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__bar">
+        Copyright © 2026 地域観光. All rights reserved.
+      </div>
+    </footer>
+
+    <script src="main.js"></script>
+  </body>
+</html>
