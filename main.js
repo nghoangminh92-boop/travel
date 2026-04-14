@@ -74,23 +74,37 @@ function initFilters() {
       const loc = (card.dataset.location || "").toLowerCase();
       const ctry = (card.dataset.country || "").toLowerCase();
       const typ = (card.dataset.type || "").toLowerCase();
-      const text = (card.innerText + card.dataset.location).toLowerCase();
+
+      // 🔥 FIX SEARCH CHUẨN
+      const text = (card.innerText + loc + ctry + typ).toLowerCase();
 
       const show =
         (location === "all" || loc === location) &&
-        (country === "all" || !ctry || ctry === country) &&
-        (type === "all" || !typ || typ === type) &&
+        (country === "all" || ctry === country) &&
+        (type === "all" || typ === type) &&
         text.includes(keyword);
 
       card.style.display = show ? "block" : "none";
     });
-    applyAllFilters(); // 🔥 THÊM DÒNG NÀY
   }
 
+  // ===============================
+  // EVENT
+  // ===============================
+
   locationFilter?.addEventListener("change", applyAllFilters);
-  countryFilter?.addEventListener("change", applyAllFilters);
+
+  countryFilter?.addEventListener("change", () => {
+    filterCitiesByCountry(); // 🔥 thêm dòng này
+    applyAllFilters();
+  });
+
   typeFilter?.addEventListener("change", applyAllFilters);
   searchInput?.addEventListener("input", applyAllFilters);
+
+  // 🔥 chạy lần đầu khi load
+  filterCitiesByCountry();
+  applyAllFilters();
 }
 
 // ===============================
@@ -212,4 +226,23 @@ function limitImages() {
       container.setAttribute("data-more", `+${imgs.length - 4}`);
     }
   });
+}
+
+function filterCitiesByCountry() {
+  const country = document.getElementById("countryFilter")?.value.toLowerCase();
+  const citySelect = document.getElementById("locationFilter");
+
+  if (!citySelect) return;
+
+  citySelect.querySelectorAll("option").forEach((opt) => {
+    const c = opt.dataset.country;
+
+    if (!c || country === "all") {
+      opt.style.display = "block";
+    } else {
+      opt.style.display = c.toLowerCase() === country ? "block" : "none";
+    }
+  });
+
+  citySelect.value = "all";
 }
