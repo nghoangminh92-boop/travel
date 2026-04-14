@@ -119,20 +119,26 @@ function filterCitiesByCountry() {
   const citySelect = document.getElementById("locationFilter");
   if (!citySelect) return;
 
-  citySelect.querySelectorAll("option").forEach((opt) => {
+  // lưu tất cả option gốc 1 lần
+  if (!citySelect.dataset.original) {
+    citySelect.dataset.original = citySelect.innerHTML;
+  }
+
+  const temp = document.createElement("div");
+  temp.innerHTML = citySelect.dataset.original;
+
+  const options = temp.querySelectorAll("option");
+
+  citySelect.innerHTML = "";
+
+  options.forEach((opt) => {
     const c = (opt.dataset.country || "").toLowerCase();
 
-    // luôn hiện option ALL
-    if (!opt.dataset.country || country === "all") {
-      opt.hidden = false;
-      return;
+    if (!opt.dataset.country || country === "all" || c === country) {
+      citySelect.appendChild(opt.cloneNode(true));
     }
-
-    // lọc theo quốc gia
-    opt.hidden = c !== country;
   });
 
-  // reset city
   citySelect.value = "all";
 }
 // ===============================
