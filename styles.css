@@ -923,6 +923,17 @@ nav {
     padding: 0;
     gap: 3rem;
   }
+  #locationFilter,
+  .search-box input {
+    width: 100%;
+    min-width: unset;
+    max-width: 100%;
+  }
+
+  .feed__filter,
+  .search-box {
+    padding: 0 1rem;
+  }
 }
 
 .post-date {
@@ -973,8 +984,4 @@ nav {
 
 .feed__images.expanded::after {
   display: none;
-}
-
-.feed__images.expanded {
-  max-height: none;
 }
