@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
   sortPosts();
   renderDates();
   limitImages();
+
+  initImageExpand(); // ✅ THÊM DÒNG NÀY
 });
 
 // ===============================
@@ -141,28 +143,45 @@ function initModal() {
 
   if (!modal || !modalBody) return;
 
-  document.querySelectorAll(".open-post").forEach((btn) => {
-    btn.onclick = () => {
-      const card = btn.closest(".feed__card");
-      if (!card) return;
+  // dùng event delegation (fix luôn lỗi sau này thêm post mới)
+  document.addEventListener("click", (e) => {
+    if (!e.target.classList.contains("open-post")) return;
 
-      const clone = card.cloneNode(true);
-      clone.querySelector(".open-post")?.remove();
+    const card = e.target.closest(".feed__card");
+    if (!card) return;
 
-      modalBody.innerHTML = "";
-      modalBody.appendChild(clone);
+    // lấy title
+    const title = card.querySelector(".feed__header p")?.innerText || "";
 
-      modal.style.display = "block";
-    };
+    // lấy content
+    const content = card.querySelector(".feed__content")?.innerHTML || "";
+
+    // 🔥 LẤY ẢNH CHUẨN (fix lỗi của bạn)
+    const images = card.querySelectorAll("img");
+
+    let imgHTML = "";
+    images.forEach((img) => {
+      imgHTML += `<img src="${img.src}" style="width:100%;margin-bottom:10px;border-radius:10px;">`;
+    });
+
+    modalBody.innerHTML = `
+      <div class="modal-post">
+        <h2>${title}</h2>
+        ${imgHTML}
+        <div class="modal-text">${content}</div>
+      </div>
+    `;
+
+    modal.style.display = "block";
   });
 
+  // đóng modal
   closeBtn.onclick = () => (modal.style.display = "none");
 
   window.onclick = (e) => {
     if (e.target === modal) modal.style.display = "none";
   };
 }
-
 // ===============================
 // 6. FORM
 // ===============================
@@ -249,3 +268,7 @@ function limitImages() {
     }
   });
 }
+
+// ===============================
+// 11. CLICK IMAGE EXPAND
+// ===============================

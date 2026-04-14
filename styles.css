@@ -699,12 +699,26 @@ nav {
 }
 
 .feed__content {
-  padding: 1rem;
+  max-height: 100px;
+  overflow: hidden;
+  position: relative;
 }
 
-.feed__content p {
-  line-height: 1.7;
-  color: var(--text-light);
+.feed__content::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  height: 40px;
+  width: 100%;
+  background: linear-gradient(transparent, white);
+}
+
+.feed__content.expanded {
+  max-height: none;
+}
+
+.feed__content.expanded::after {
+  display: none;
 }
 
 /* ACTIONS */
@@ -763,28 +777,6 @@ nav {
 }
 
 /* IMAGES */
-.feed__images {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 5px;
-  max-height: 200px;
-  overflow: hidden;
-  position: relative;
-}
-
-.feed__images img {
-  width: 100%;
-  object-fit: cover;
-}
-
-.feed__images::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  height: 40px;
-  width: 100%;
-  background: linear-gradient(transparent, white);
-}
 
 /* BUTTON */
 .open-post {
@@ -953,4 +945,32 @@ nav {
   .package__grid {
     gap: 2rem;
   }
+}
+
+/* ================= IMAGE LIMIT ================= */
+
+/* mặc định: chỉ hiện 4 ảnh */
+.feed__images {
+  max-height: 250px; /* 👈 giới hạn chiều cao */
+  overflow: hidden;
+  position: relative;
+}
+
+/* hiệu ứng mờ giống text */
+.feed__images::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(transparent, white);
+}
+
+/* khi mở full */
+.feed__images.expanded {
+  max-height: none;
+}
+
+.feed__images.expanded::after {
+  display: none;
 }
