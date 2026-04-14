@@ -974,3 +974,7 @@ nav {
 .feed__images.expanded::after {
   display: none;
 }
+
+.feed__images.expanded {
+  max-height: none;
+}

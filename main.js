@@ -272,3 +272,11 @@ function limitImages() {
 // ===============================
 // 11. CLICK IMAGE EXPAND
 // ===============================
+
+function initImageExpand() {
+  document.querySelectorAll(".feed__images").forEach((el) => {
+    el.addEventListener("click", () => {
+      el.classList.toggle("expanded");
+    });
+  });
+}
