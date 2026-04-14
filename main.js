@@ -112,27 +112,29 @@ function initFilters() {
 // 4. FILTER CITY THEO COUNTRY
 // ===============================
 function filterCitiesByCountry() {
-  const country = document.getElementById("countryFilter")?.value.toLowerCase();
+  const country = document
+    .getElementById("countryFilter")
+    ?.value?.toLowerCase();
 
   const citySelect = document.getElementById("locationFilter");
-
   if (!citySelect) return;
 
   citySelect.querySelectorAll("option").forEach((opt) => {
-    const c = opt.dataset.country;
+    const c = (opt.dataset.country || "").toLowerCase();
 
-    // nếu ALL → hiện hết
-    if (!c || country === "all") {
-      opt.style.display = "block";
-    } else {
-      opt.style.display = c.toLowerCase() === country ? "block" : "none";
+    // luôn hiện option ALL
+    if (!opt.dataset.country || country === "all") {
+      opt.hidden = false;
+      return;
     }
+
+    // lọc theo quốc gia
+    opt.hidden = c !== country;
   });
 
   // reset city
   citySelect.value = "all";
 }
-
 // ===============================
 // 5. MODAL
 // ===============================
