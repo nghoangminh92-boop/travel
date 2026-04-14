@@ -11,9 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
   sortPosts();
   renderDates();
   limitImages();
-  document
-    .getElementById("countryFilter")
-    ?.addEventListener("change", filterCitiesByCountry);
 });
 
 // ===============================
@@ -59,7 +56,7 @@ function initScrollReveal() {
 }
 
 // ===============================
-// 3. FILTER + SEARCH (FULL)
+// 3. FILTER + SEARCH (FIX FULL)
 // ===============================
 function initFilters() {
   const locationFilter = document.getElementById("locationFilter");
@@ -78,8 +75,8 @@ function initFilters() {
       const ctry = (card.dataset.country || "").toLowerCase();
       const typ = (card.dataset.type || "").toLowerCase();
 
-      // 🔥 FIX SEARCH CHUẨN
-      const text = (card.innerText + loc + ctry + typ).toLowerCase();
+      // 🔥 FIX Git (innerText lỗi → dùng textContent)
+      const text = (card.textContent + loc + ctry + typ).toLowerCase();
 
       const show =
         (location === "all" || loc === location) &&
@@ -94,24 +91,48 @@ function initFilters() {
   // ===============================
   // EVENT
   // ===============================
-
   locationFilter?.addEventListener("change", applyAllFilters);
 
   countryFilter?.addEventListener("change", () => {
-    filterCitiesByCountry(); // 🔥 thêm dòng này
+    filterCitiesByCountry();
     applyAllFilters();
   });
 
   typeFilter?.addEventListener("change", applyAllFilters);
   searchInput?.addEventListener("input", applyAllFilters);
 
-  // 🔥 chạy lần đầu khi load
+  // chạy lần đầu
   filterCitiesByCountry();
   applyAllFilters();
 }
 
 // ===============================
-// 4. MODAL (DETAIL VIEW)
+// 4. FILTER CITY THEO COUNTRY
+// ===============================
+function filterCitiesByCountry() {
+  const country = document.getElementById("countryFilter")?.value.toLowerCase();
+
+  const citySelect = document.getElementById("locationFilter");
+
+  if (!citySelect) return;
+
+  citySelect.querySelectorAll("option").forEach((opt) => {
+    const c = opt.dataset.country;
+
+    // nếu ALL → hiện hết
+    if (!c || country === "all") {
+      opt.style.display = "block";
+    } else {
+      opt.style.display = c.toLowerCase() === country ? "block" : "none";
+    }
+  });
+
+  // reset city
+  citySelect.value = "all";
+}
+
+// ===============================
+// 5. MODAL
 // ===============================
 function initModal() {
   const modal = document.getElementById("postModal");
@@ -143,7 +164,7 @@ function initModal() {
 }
 
 // ===============================
-// 5. FORM SUBMIT
+// 6. FORM
 // ===============================
 function initForm() {
   const form = document.getElementById("shareForm");
@@ -155,13 +176,14 @@ function initForm() {
     e.preventDefault();
 
     try {
-      const res = await fetch(form.action, {
+      const res = await fetch(form.action || "#", {
         method: "POST",
         body: new FormData(form),
         headers: { Accept: "application/json" },
       });
 
       msg.textContent = res.ok ? "送信成功 🎉" : "送信失敗 ❌";
+
       if (res.ok) form.reset();
     } catch {
       msg.textContent = "エラー ❌";
@@ -170,7 +192,7 @@ function initForm() {
 }
 
 // ===============================
-// 6. DATE FORMAT
+// 7. DATE
 // ===============================
 function formatTimeAgo(dateString) {
   const postDate = new Date(dateString);
@@ -184,9 +206,6 @@ function formatTimeAgo(dateString) {
   return postDate.toLocaleDateString("ja-JP");
 }
 
-// ===============================
-// 7. RENDER DATE
-// ===============================
 function renderDates() {
   document.querySelectorAll(".feed__card").forEach((card) => {
     const date = card.dataset.date;
@@ -196,7 +215,7 @@ function renderDates() {
 }
 
 // ===============================
-// 8. SORT POSTS
+// 8. SORT
 // ===============================
 function sortPosts() {
   const grid = document.querySelector(".feed__grid");
@@ -210,7 +229,7 @@ function sortPosts() {
 }
 
 // ===============================
-// 9. AUTO DATE FORM
+// 9. DATE FORM
 // ===============================
 function setFormDate() {
   const input = document.getElementById("postDate");
@@ -218,7 +237,7 @@ function setFormDate() {
 }
 
 // ===============================
-// 10. LIMIT IMAGES + OVERLAY
+// 10. LIMIT IMAGE
 // ===============================
 function limitImages() {
   document.querySelectorAll(".feed__images").forEach((container) => {
@@ -229,23 +248,4 @@ function limitImages() {
       container.setAttribute("data-more", `+${imgs.length - 4}`);
     }
   });
-}
-
-function filterCitiesByCountry() {
-  const country = document.getElementById("countryFilter")?.value.toLowerCase();
-  const citySelect = document.getElementById("locationFilter");
-
-  if (!citySelect) return;
-
-  citySelect.querySelectorAll("option").forEach((opt) => {
-    const c = opt.dataset.country;
-
-    if (!c || country === "all") {
-      opt.style.display = "block";
-    } else {
-      opt.style.display = c.toLowerCase() === country ? "block" : "none";
-    }
-  });
-
-  citySelect.value = "all";
 }
